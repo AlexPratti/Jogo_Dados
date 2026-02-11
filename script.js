@@ -1,36 +1,51 @@
-const dice = document.getElementById('dice');
-const rollButton = document.getElementById('rollButton');
-const result = document.getElementById('result');
-const question = document.getElementById('question');
+// Função para rolar o dado
+function rolarDado() {
+    const dado = document.getElementById("dado");
+    const numero = Math.floor(Math.random() * 6) + 1; // Gera um número entre 1 e 6
 
-// Lista de questões para cada número
-const questions = {
-    1: "Qual é a sua cor favorita?",
-    2: "Qual foi o último filme que você assistiu?",
-    3: "Se pudesse visitar qualquer lugar no mundo, para onde iria?",
-    4: "Qual é seu prato favorito?",
-    5: "Qual é o seu maior sonho?",
-    6: "Se pudesse ter um superpoder, qual seria?"
-};
+    // Limpa o dado antes de gerar as bolinhas
+    dado.innerHTML = "";
+    dado.className = "dado dado-" + numero;
 
-// Função para rolar o dado e exibir o resultado
-function rollDice() {
-    // Gera um número aleatório entre 1 e 6
-    const randomNumber = Math.floor(Math.random() * 6) + 1;
+    // Adiciona as bolinhas conforme o número
+    const bolinhasPosicoes = {
+        1: [[50, 50]],
+        2: [[25, 25], [75, 75]],
+        3: [[25, 25], [50, 50], [75, 75]],
+        4: [[25, 25], [25, 75], [75, 25], [75, 75]],
+        5: [[25, 25], [25, 75], [50, 50], [75, 25], [75, 75]],
+        6: [[25, 25], [25, 50], [25, 75], [75, 25], [75, 50], [75, 75]]
+    };
 
-    // Simula o movimento do dado
-    dice.textContent = '?';
-    dice.style.transition = 'transform 1s';
-    dice.style.transform = 'rotate(360deg)';
-
-    // Após 1 segundo, exibe o resultado
-    setTimeout(() => {
-        dice.style.transform = 'rotate(0deg)';
-        dice.textContent = randomNumber;
-        result.textContent = `Você rolou o número ${randomNumber}`;
-        question.textContent = questions[randomNumber];
-    }, 1000);
+    bolinhasPosicoes[numero].forEach(([top, left]) => {
+        const bolinha = document.createElement("div");
+        bolinha.className = "bolinha";
+        bolinha.style.top = `${top}%`;
+        bolinha.style.left = `${left}%`;
+        dado.appendChild(bolinha);
+    });
 }
 
-// Adiciona evento ao botão
-rollButton.addEventListener('click', rollDice);
+// Lista de perguntas
+const listaPerguntas = [];
+
+// Função para adicionar perguntas
+function adicionarPergunta() {
+    const pergunta = document.getElementById("nova-pergunta").value;
+    if (pergunta.trim()) {
+        listaPerguntas.push(pergunta.trim());
+        atualizarListaPerguntas();
+        document.getElementById("nova-pergunta").value = ""; // Limpa o campo
+    }
+}
+
+// Função para atualizar a lista de perguntas
+function atualizarListaPerguntas() {
+    const lista = document.getElementById("lista-perguntas");
+    lista.innerHTML = ""; // Limpa a lista
+    listaPerguntas.forEach((pergunta, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${index + 1}. ${pergunta}`;
+        lista.appendChild(li);
+    });
+}
