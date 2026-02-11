@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Jogo de Dados</h1>
+    <header>
+        <h1>Jogo de Dados</h1>
+        <p>Rolar o dado e responder as questões!</p>
+    </header>
 
-    <!-- Dado -->
-    <div id="dado" class="dado"></div>
-    <button onclick="rolarDado()">Rolar Dado</button>
+    <!-- Área do dado -->
+    <section class="dado-container">
+        <div id="dado" class="dado"></div>
+        <button onclick="rolarDado()">Rolar Dado</button>
+    </section>
 
     <!-- Aba para inserir perguntas -->
-    <div class="aba-perguntas">
+    <section class="aba-perguntas">
         <h2>Inserir Perguntas</h2>
         <form id="form-perguntas">
             <textarea id="nova-pergunta" placeholder="Digite sua pergunta ou questão"></textarea>
@@ -22,7 +27,7 @@
         </form>
         <h3>Lista de Perguntas:</h3>
         <ul id="lista-perguntas"></ul>
-    </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
