@@ -8,26 +8,33 @@
 </head>
 <body>
     <header>
-        <h1>Jogo de Dados</h1>
-        <p>Rolar o dado e responder as questões!</p>
+        <h1>🎲 Jogo de Dados</h1>
+        <p>Role o dado e responda as questões!</p>
     </header>
 
-    <!-- Área do dado -->
-    <section class="dado-container">
-        <div id="dado" class="dado"></div>
-        <button onclick="rolarDado()">Rolar Dado</button>
-    </section>
+    <main>
+        <!-- Área do dado -->
+        <section class="dado-container">
+            <h2>Rolar o Dado</h2>
+            <div id="dado" class="dado"></div>
+            <button onclick="rolarDado()">🎲 Rolar Dado</button>
+        </section>
 
-    <!-- Aba para inserir perguntas -->
-    <section class="aba-perguntas">
-        <h2>Inserir Perguntas</h2>
-        <form id="form-perguntas">
-            <textarea id="nova-pergunta" placeholder="Digite sua pergunta ou questão"></textarea>
-            <button type="button" onclick="adicionarPergunta()">Adicionar Pergunta</button>
-        </form>
-        <h3>Lista de Perguntas:</h3>
-        <ul id="lista-perguntas"></ul>
-    </section>
+        <!-- Aba para inserir perguntas -->
+        <section class="aba-perguntas">
+            <h2>Inserir Perguntas</h2>
+            <form id="form-perguntas">
+                <textarea id="nova-pergunta" placeholder="Digite sua pergunta ou questão"></textarea>
+                <button type="button" onclick="adicionarPergunta()">Adicionar Pergunta</button>
+            </form>
+            <h3>Lista de Perguntas:</h3>
+            <ul id="lista-perguntas"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por você 🚀</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
