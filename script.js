@@ -5,7 +5,6 @@ function rolarDado() {
 
     // Limpa o dado antes de gerar as bolinhas
     dado.innerHTML = "";
-    dado.className = "dado dado-" + numero;
 
     // Adiciona as bolinhas conforme o número
     const bolinhasPosicoes = {
