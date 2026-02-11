@@ -3,9 +3,30 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 20px;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
-/* Estilo do dado */
+/* Cabeçalho */
+header {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #007bff;
+}
+
+p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Área do dado */
+.dado-container {
+    margin: 20px auto;
+}
+
 .dado {
     width: 100px;
     height: 100px;
@@ -16,6 +37,7 @@ body {
     position: relative;
     margin: 20px auto;
     border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Bolinhas do dado */
@@ -27,17 +49,7 @@ body {
     position: absolute;
 }
 
-/* Estilo da aba de perguntas */
-.aba-perguntas {
-    margin-top: 30px;
-}
-
-textarea {
-    width: 80%;
-    height: 80px;
-    margin-bottom: 10px;
-}
-
+/* Botão */
 button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -45,10 +57,29 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1em;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Aba de perguntas */
+.aba-perguntas {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 80%;
+    height: 80px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 ul {
@@ -61,4 +92,5 @@ li {
     background-color: #f8f9fa;
     padding: 10px;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
