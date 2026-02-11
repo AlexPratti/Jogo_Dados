@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Dados</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game">
-        <h1>Jogo de Dados Virtual</h1>
-        <div id="dice" class="dice"></div>
-        <button id="rollButton">Lançar Dado</button>
-        <p id="result"></p>
-        <p id="question"></p>
+    <h1>Jogo de Dados</h1>
+
+    <!-- Dado -->
+    <div id="dado" class="dado"></div>
+    <button onclick="rolarDado()">Rolar Dado</button>
+
+    <!-- Aba para inserir perguntas -->
+    <div class="aba-perguntas">
+        <h2>Inserir Perguntas</h2>
+        <form id="form-perguntas">
+            <textarea id="nova-pergunta" placeholder="Digite sua pergunta ou questão"></textarea>
+            <button type="button" onclick="adicionarPergunta()">Adicionar Pergunta</button>
+        </form>
+        <h3>Lista de Perguntas:</h3>
+        <ul id="lista-perguntas"></ul>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
