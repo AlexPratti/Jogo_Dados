@@ -152,24 +152,35 @@ if st.session_state.jogo_ativo and st.session_state.figura_atual:
 
     st.write("---")
     
-    # Animação de queda da imagem
+    # Animação de queda da imagem com cronômetro regressivo
     container_queda = st.empty()
     caminho_imagem = f"{st.session_state.figura_atual}.png"
     
     if os.path.exists(caminho_imagem):
-        # ALTERAÇÃO AQUI: o passo mudou de 12 para 6 para a queda acontecer na metade da velocidade anterior
-        for y in range(st.session_state.posicao_y, 300, 6):
+        # O range de 0 a 300 com passo 6 faz exatamente 50 iterações
+        passos_totais = 50
+        
+        for idx, y in enumerate(range(st.session_state.posicao_y, 300, 6)):
             st.session_state.posicao_y = y
+            
+            # Calcula o valor do cronômetro (começa em 50 e termina em 1)
+            tempo_restante = passos_totais - idx
+            
             with container_queda.container():
+                # Exibe o cronômetro centralizado e destacado
+                st.markdown(f"<h2 style='text-align: center; color: #FF4B4B;'>⏱️ {tempo_restante}</h2>", unsafe_allow_html=True)
+                # Cria o espaçamento vertical para o efeito de queda
                 st.markdown(f"<div style='height:{y}px;'></div>", unsafe_allow_html=True)
                 st.image(caminho_imagem, width=130)
+                
             time.sleep(0.15) 
             
-        # Perda por tempo
+        # Perda por tempo (atingiu o fim dos 50 passos)
         st.session_state.score -= 5
         st.session_state.status_jogada = "errou"
         st.session_state.jogo_ativo = False
         st.rerun()
+
         
     else:
         nome_da_figura_com_erro = st.session_state.dicionario_figuras[st.session_state.figura_atual]
