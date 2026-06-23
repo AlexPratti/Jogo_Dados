@@ -152,34 +152,37 @@ if st.session_state.jogo_ativo and st.session_state.figura_atual:
 
     st.write("---")
     
-    # Animação de queda da imagem com cronômetro regressivo
+    # Animação de queda da imagem com cronômetro em segundos reais
     container_queda = st.empty()
     caminho_imagem = f"{st.session_state.figura_atual}.png"
     
     if os.path.exists(caminho_imagem):
-        # O range de 0 a 300 com passo 6 faz exatamente 50 iterações
-        passos_totais = 50
+        # 50 passos totais / 5 passos por segundo = 10 segundos de duração
+        passos_por_segundo = 5
+        segundos_totais = 10
         
         for idx, y in enumerate(range(st.session_state.posicao_y, 300, 6)):
             st.session_state.posicao_y = y
             
-            # Calcula o valor do cronômetro (começa em 50 e termina em 1)
-            tempo_restante = passos_totais - idx
+            # Calcula o segundo real dividindo o índice atual por 5
+            # Ex: idx 0 a 4 -> mostra 10s | idx 5 a 9 -> mostra 9s...
+            segundos_restantes = segundos_totais - (idx // passos_por_segundo)
             
             with container_queda.container():
-                # Exibe o cronômetro centralizado e destacado
-                st.markdown(f"<h2 style='text-align: center; color: #FF4B4B;'>⏱️ {tempo_restante}</h2>", unsafe_allow_html=True)
-                # Cria o espaçamento vertical para o efeito de queda
+                # Exibe o tempo restante em segundos reais
+                st.markdown(f"<h2 style='text-align: center; color: #FF4B4B;'>⏱️ {segundos_restantes}s</h2>", unsafe_allow_html=True)
                 st.markdown(f"<div style='height:{y}px;'></div>", unsafe_allow_html=True)
                 st.image(caminho_imagem, width=130)
                 
-            time.sleep(0.15) 
+            # Ajustado para 0.20s para que 5 passos deem exatamente 1 segundo completo
+            time.sleep(0.20) 
             
-        # Perda por tempo (atingiu o fim dos 50 passos)
+        # Perda por tempo
         st.session_state.score -= 5
         st.session_state.status_jogada = "errou"
         st.session_state.jogo_ativo = False
         st.rerun()
+
 
         
     else:
