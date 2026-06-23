@@ -8,7 +8,6 @@ st.set_page_config(page_title="Jogo dos Blocos", layout="centered")
 st.title("🧩 Jogo dos Blocos")
 
 # 1. GERENCIAMENTO DO DICIONÁRIO DE FIGURAS
-# Inicializa o dicionário padrão no estado da sessão
 if "dicionario_figuras" not in st.session_state:
     st.session_state.dicionario_figuras = {
         "fig_1": "Escada",
@@ -39,15 +38,13 @@ with aba_cadastro:
         else:
             st.error("Preencha ambos os campos!")
 
-# ABA 2: EDITAR OS NOMES EXISTENTES (Nova funcionalidade!)
+# ABA 2: EDITAR OS NOMES EXISTENTES
 with aba_editar:
     st.write("### Modificar Nomes Atuais")
     st.caption("Altere o nome na caixa e clique em 'Salvar Alterações'.")
     
-    # Criamos um dicionário temporário para capturar as mudanças do usuário
     novos_valores = {}
     for arquivo_id, nome_atual in st.session_state.dicionario_figuras.items():
-        # Cria uma caixa de texto para cada figura com o nome atual preenchido
         novos_valores[arquivo_id] = st.text_input(
             f"Nome para {arquivo_id}.png:", 
             value=nome_atual, 
@@ -55,8 +52,8 @@ with aba_editar:
         ).strip()
     
     if st.button("💾 Salvar Alterações", use_container_width=True):
-        # Atualiza o dicionário principal com os novos nomes digitados
         st.session_state.dicionario_figuras = novos_valores
+        st.session_state.jogo_ativo = False  # Reseta o jogo ativo para aplicar as mudanças com segurança
         st.success("Nomes atualizados com sucesso!")
         st.rerun()
 
@@ -121,7 +118,8 @@ if st.session_state.jogo_ativo and st.session_state.figura_atual:
     
     for idx, (arquivo_id, nome_real) in enumerate(st.session_state.dicionario_figuras.items()):
         with colunas[idx]:
-            if st.button(nome_real, key=f"btn_{arquivo_id}", use_container_width=True):
+            # ALTERAÇÃO AQUI: A key agora muda junto com o nome_real da figura
+            if st.button(nome_real, key=f"btn_{arquivo_id}_{nome_real}", use_container_width=True):
                 if arquivo_id == st.session_state.figura_atual:
                     st.session_state.score += 10
                     st.session_state.status_jogada = "acertou"
